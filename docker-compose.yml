@@ -1,0 +1,17 @@
+version: '3'
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.44.27.1/24
+
+services:
+  db:
+    image: mysql:5
+    environment:
+      - MYSQL_ROOT_PASSWORD=testing
+      - MYSQL_DATABASE=testing
+    ports:
+      - "32123:3306"
