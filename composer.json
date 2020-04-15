@@ -1,5 +1,5 @@
 {
-  "name": "renttek/m2-search-criteria-processor",
+  "name": "renttek/magento2-search-criteria-processor",
   "license": "proprietary",
   "description": "Generic processor for Magento 2 SearchCriteria",
   "type": "library",
