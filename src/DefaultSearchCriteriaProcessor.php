@@ -8,7 +8,7 @@ namespace Renttek\SearchCriteriaProcessor;
 class DefaultSearchCriteriaProcessor extends ChainProcessor
 {
     public function __construct(
-        JoinProcessor $filterProcessor,
+        FilterProcessor $filterProcessor,
         LimitProcessor $limitProcessor,
         SortOrderProcessor $sortProcessor,
         JoinProcessor $joinProcessor = null
