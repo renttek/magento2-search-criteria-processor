@@ -127,4 +127,4 @@ You want to improve this library, report or even fix a bug? Awesome! Please, do 
 You got questions? You can reach me here:
 
 - Twitter: [@Renttek92](https://twitter.com/Renttek92)
-- E-Mail:  [juliann+github@renttek.de](mailto:juliann+github@renttek.de?subject=Question about SearchCriteriaProcessor)
+- E-Mail:  juliann+github@renttek.de
