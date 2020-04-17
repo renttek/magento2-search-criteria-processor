@@ -6,6 +6,11 @@ Helper library for processing search M2 SearchCriteria in custom repositories/qu
 
 License: MIT
 
+## Why?
+
+"But why? You can always use the default magento models & collections, yada yada"
+Yeah, I know, but I don't really like them, as they are really bloated (my opinion)
+
 ## Features
 
 This library contains processor classes which will add the following things to queries:
