@@ -3,7 +3,8 @@
 Helper library for processing search M2 SearchCriteria in custom repositories/queries.
 
 [![Latest Stable Version](https://poser.pugx.org/renttek/magento2-search-criteria-processor/version)](https://packagist.org/packages/renttek/magento2-search-criteria-processor)
-[![License](https://poser.pugx.org/renttek/magento2-search-criteria-processor/license)](https://packagist.org/packages/renttek/magento2-search-criteria-processor)
+
+License: MIT
 
 ## Features
 
