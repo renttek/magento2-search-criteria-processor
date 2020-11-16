@@ -8,12 +8,19 @@ use Magento\Framework\DB\Select;
 
 class ChainProcessor implements ProcessorInterface
 {
-    private $processors;
+    /**
+     * @var ProcessorInterface[]
+     */
+    private array $processors;
 
+    /**
+     * ChainProcessor constructor.
+     *
+     * @param ProcessorInterface[] $processors
+     */
     public function __construct(array $processors)
     {
-        array_walk($processors, 'Renttek\SearchCriteriaProcessor\assertImplementsProcessorInterface');
-        $this->processors = $processors;
+        $this->setProcessors(...$processors);
     }
 
     public function process(Select $select, SearchCriteriaInterface $searchCriteria): Select
@@ -30,5 +37,10 @@ class ChainProcessor implements ProcessorInterface
         return static function (Select $select, ProcessorInterface $processor) use ($searchCriteria): Select {
             return $processor->process($select, $searchCriteria);
         };
+    }
+
+    private function setProcessors(ProcessorInterface ...$processors): void
+    {
+        $this->processors = $processors;
     }
 }

@@ -8,6 +8,11 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 
 class FilterFieldExtractor extends AbstractFieldExtractor implements FieldExtractorInterface
 {
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     *
+     * @return array{string, string}[]
+     */
     public function getFields(SearchCriteriaInterface $searchCriteria): array
     {
         $filterGroups      = $searchCriteria->getFilterGroups() ?? [];
@@ -17,7 +22,11 @@ class FilterFieldExtractor extends AbstractFieldExtractor implements FieldExtrac
     }
 
     /**
-     * @SuppressWarnings(PMD)
+     * @param FilterGroup $filterGroup
+     *
+     * @return array{string, string}[]
+     *
+     * @SuppressWarnings(PMD.UnusedPrivateMethod)
      */
     private function getFilterGroupTables(FilterGroup $filterGroup): array
     {
@@ -28,7 +37,11 @@ class FilterFieldExtractor extends AbstractFieldExtractor implements FieldExtrac
     }
 
     /**
-     * @SuppressWarnings(PMD)
+     * @param Filter $filter
+     *
+     * @return array{string, string}|null
+     *
+     * @SuppressWarnings(PMD.UnusedPrivateMethod)
      */
     private function getFilterTable(Filter $filter): ?array
     {

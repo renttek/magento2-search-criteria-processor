@@ -10,13 +10,17 @@ class SortOrderFieldExtractor extends AbstractFieldExtractor implements FieldExt
     public function getFields(SearchCriteriaInterface $searchCriteria): array
     {
         $sortOrders = $searchCriteria->getSortOrders() ?? [];
-        $tables = array_map([$this, 'getSortOrderTable'], $sortOrders);
+        $tables     = array_map([$this, 'getSortOrderTable'], $sortOrders);
 
         return array_filter($tables);
     }
 
     /**
-     * @SuppressWarnings(PMD)
+     * @param SortOrder $sortOrder
+     *
+     * @return array{string, string}|null
+     *
+     * @SuppressWarnings(PMD.UnusedPrivateMethod)
      */
     private function getSortOrderTable(SortOrder $sortOrder): ?array
     {

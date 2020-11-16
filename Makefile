@@ -1,3 +1,6 @@
+MYSQL_PORT=32123
+MYSQL_PING=mysqladmin ping -h127.0.0.1 -P$(MYSQL_PORT) -uroot -ptesting --silent 2>/dev/null
+
 ifndef VERBOSE
 .SILENT:
 endif
@@ -6,15 +9,15 @@ all: static test
 test: test-unit
 ci: static test-unit-ci
 
-# .PHONY: test-unit
+.PHONY: test-unit
 test-unit:
 	vendor/bin/phpunit --testsuite Unit --order-by=random --prepend test/xdebug-filter.php
+.PHONY: test-unit
 
 test-unit-ci:
 	vendor/bin/phpunit --testsuite Unit --order-by=random --prepend test/xdebug-filter.php --color=never --coverage-text
+.PHONY: test-unit-ci
 
-MYSQL_PORT=32123
-MYSQL_PING=mysqladmin ping -h127.0.0.1 -P$(MYSQL_PORT) -uroot -ptesting --silent 2>/dev/null
 test-integration:
 	docker-compose up -d db
 	echo -n "waiting for mysql container"
@@ -22,6 +25,7 @@ test-integration:
 	DB_PORT=$(MYSQL_PORT) vendor/bin/phpunit --testsuite Integration --order-by=random --prepend test/xdebug-filter.php
 	docker-compose stop -t 0 db
 	docker-compose rm -f db
+.PHONY: test-integration
 
 static:
 	echo "Linting files"
@@ -38,3 +42,4 @@ static:
 
 	echo "Running PHPStan"
 	vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon
+.PHONY: static

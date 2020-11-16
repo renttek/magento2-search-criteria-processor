@@ -11,10 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class SortOrderProcessorTest extends TestCase
 {
-    /**
-     * @var SortOrderProcessor
-     */
-    private $sortOrderProcessor;
+    private SortOrderProcessor $sortOrderProcessor;
 
     protected function setUp(): void
     {
@@ -29,7 +26,7 @@ class SortOrderProcessorTest extends TestCase
 
         $this->sortOrderProcessor->process($select, $searchCriteria);
 
-        self::assertRegExp('/ ORDER BY `myField` ASC$/', (string)$select);
+        self::assertMatchesRegularExpression('/ ORDER BY `myField` ASC$/', (string)$select);
     }
 
     public function testMultipleSortOrders(): void
@@ -44,7 +41,7 @@ class SortOrderProcessorTest extends TestCase
 
         $this->sortOrderProcessor->process($select, $searchCriteria);
 
-        self::assertRegExp('/ ORDER BY `first` DESC, `second` ASC$/', (string)$select);
+        self::assertMatchesRegularExpression('/ ORDER BY `first` DESC, `second` ASC$/', (string)$select);
     }
 
     private function getSortOrder(string $field, string $direction): SortOrder

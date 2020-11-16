@@ -13,10 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class FilterProcessorTest extends TestCase
 {
-    /**
-     * @var FilterProcessor
-     */
-    private $filterProcessor;
+    private FilterProcessor $filterProcessor;
 
     protected function setUp(): void
     {
@@ -33,7 +30,7 @@ class FilterProcessorTest extends TestCase
 
         $this->filterProcessor->process($select, $searchCriteria);
 
-        self::assertRegExp("/ WHERE \(bar = 'baz'\)$/", (string)$select);
+        self::assertMatchesRegularExpression("/ WHERE \(bar = 'baz'\)$/", (string)$select);
     }
 
     public function testMultipleFilterSingleFilterGroup(): void
@@ -51,7 +48,7 @@ class FilterProcessorTest extends TestCase
 
         $this->filterProcessor->process($select, $searchCriteria);
 
-        self::assertRegExp("/ WHERE \(bar = 'baz' OR lorem != 'ipsum'\)$/", (string)$select);
+        self::assertMatchesRegularExpression("/ WHERE \(bar = 'baz' OR lorem != 'ipsum'\)$/", (string)$select);
     }
 
     public function testMultipleFilterMultipleFilterGroups(): void
@@ -83,6 +80,6 @@ class FilterProcessorTest extends TestCase
         $sql = (string)$select;
         self::assertStringContainsString("(bar = 'baz' OR lorem != 'ipsum')", $sql);
         self::assertStringContainsString("(chuck != 'norris' OR test = 'test')", $sql);
-        self::assertRegExp("/ WHERE \(.*?\) AND \(.*?\)$/", (string)$select);
+        self::assertMatchesRegularExpression("/ WHERE \(.*?\) AND \(.*?\)$/", (string)$select);
     }
 }

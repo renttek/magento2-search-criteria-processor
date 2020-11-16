@@ -59,20 +59,6 @@ class JoinProcessorTest extends TestCase
         $this->joinProcessor = new JoinProcessor($this->fieldExtractorMock, [$this->joinMock]);
     }
 
-    public function testThrowsExceptionIfJoinsDoNotImplementInterface(): void
-    {
-        $dummyFieldExtractor = new class implements FieldExtractorInterface
-        {
-            public function getFields(SearchCriteriaInterface $searchCriteria): array
-            {
-                return [];
-            }
-        };
-
-        $this->expectException(InvalidArgumentException::class);
-        new JoinProcessor($dummyFieldExtractor, [new stdClass]);
-    }
-
     public function testGetsTablesFromAllFieldExtractors(): void
     {
         $this->fieldExtractorMock

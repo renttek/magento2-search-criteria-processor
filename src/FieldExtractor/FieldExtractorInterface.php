@@ -6,5 +6,10 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 
 interface FieldExtractorInterface
 {
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     *
+     * @return array{string, string}[]
+     */
     public function getFields(SearchCriteriaInterface $searchCriteria): array;
 }

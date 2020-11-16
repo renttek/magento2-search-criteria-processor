@@ -6,20 +6,9 @@ use Magento\Framework\DB\Select;
 
 class LeftJoin implements JoinInterface
 {
-    /**
-     * @var string
-     */
-    private $mainTableField;
-
-    /**
-     * @var string
-     */
-    private $foreignTableName;
-
-    /**
-     * @var string
-     */
-    private $foreignTableField;
+    private string $mainTableField;
+    private string $foreignTableName;
+    private string $foreignTableField;
 
     public function __construct(string $mainTableField, string $foreignTableName, string $foreignTableField)
     {

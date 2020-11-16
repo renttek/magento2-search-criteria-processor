@@ -10,22 +10,21 @@ use RuntimeException;
 
 class JoinProcessor implements ProcessorInterface
 {
-    /**
-     * @var FieldExtractorInterface
-     */
-    private $fieldExtractor;
+    private FieldExtractorInterface $fieldExtractor;
 
     /**
      * @var JoinInterface[]
      */
-    private $joins;
+    private array $joins;
 
+    /**
+     * @param FieldExtractorInterface $fieldExtractor
+     * @param JoinInterface[]         $joins
+     */
     public function __construct(FieldExtractorInterface $fieldExtractor, array $joins)
     {
         $this->fieldExtractor = $fieldExtractor;
-
-        array_walk($joins, 'Renttek\SearchCriteriaProcessor\assertImplementsJoinInterface');
-        $this->joins = $joins;
+        $this->setJoins(...$joins);
     }
 
     public function process(Select $select, SearchCriteriaInterface $searchCriteria): Select
@@ -44,6 +43,11 @@ class JoinProcessor implements ProcessorInterface
         return $select;
     }
 
+    /**
+     * @param SearchCriteriaInterface $searchCriteria
+     *
+     * @return array<string, array<string>>
+     */
     private function getTablesFromSearchCriteria(SearchCriteriaInterface $searchCriteria): array
     {
         $fields = $this->fieldExtractor->getFields($searchCriteria);
@@ -60,5 +64,10 @@ class JoinProcessor implements ProcessorInterface
         }
 
         return null;
+    }
+
+    private function setJoins(JoinInterface ...$joins): void
+    {
+        $this->joins = $joins;
     }
 }

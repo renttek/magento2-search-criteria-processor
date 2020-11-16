@@ -10,10 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class LimitProcessorTest extends TestCase
 {
-    /**
-     * @var LimitProcessor
-     */
-    private $limitProcessor;
+    private LimitProcessor $limitProcessor;
 
     protected function setUp(): void
     {
@@ -27,7 +24,7 @@ class LimitProcessorTest extends TestCase
 
         $this->limitProcessor->process($select, $searchCriteria);
 
-        self::assertRegExp('/ LIMIT 13$/', (string)$select);
+        self::assertMatchesRegularExpression('/ LIMIT 13$/', (string)$select);
     }
 
     public function testOnlyCurrentPage(): void
@@ -47,6 +44,6 @@ class LimitProcessorTest extends TestCase
 
         $this->limitProcessor->process($select, $searchCriteria);
 
-        self::assertRegExp('/ LIMIT 9 OFFSET 63$/', (string)$select);
+        self::assertMatchesRegularExpression('/ LIMIT 9 OFFSET 63$/', (string)$select);
     }
 }
