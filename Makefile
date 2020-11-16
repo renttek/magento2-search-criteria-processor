@@ -31,11 +31,10 @@ static:
 
 	echo "Running CodeSniffer"
 	vendor/bin/phpcs --standard=psr2 src
-	vendor/bin/phpcs --standard=psr2 test
+	vendor/bin/phpcs --standard=psr2 test/Unit
 
 	echo "Running MessDetector"
 	vendor/bin/phpmd src text cleancode,codesize,design,unusedcode
-	vendor/bin/phpmd test text cleancode,codesize,design,unusedcode
 
 	echo "Running PHPStan"
 	vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon
