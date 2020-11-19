@@ -21,3 +21,29 @@ function groupFieldsByTables(array $fields): array
 
     return array_reduce($fields, $reducer, []);
 }
+
+/**
+ * @param array<mixed> $array
+ * @param callable     $filterFn
+ *
+ * @return array<mixed>
+ *
+ * @codeCoverageIgnore
+ */
+function filter(array $array, callable $filterFn): array
+{
+    return array_filter($array, $filterFn);
+}
+
+/**
+ * @param array<mixed> $array
+ * @param callable     $mapFn
+ *
+ * @return array<mixed>
+ *
+ * @codeCoverageIgnore
+ */
+function map(array $array, callable $mapFn): array
+{
+    return array_map($mapFn, $array);
+}
