@@ -96,7 +96,7 @@ class LimitProcessorTest extends TestCase
         $this->selectMock
             ->expects(self::once())
             ->method('limit')
-            ->with(self::anything(), 91);
+            ->with(self::anything(), 78); // (7 - 1) * 13
 
         $this->limitProcessor->process($this->selectMock, $this->searchCriteriaMock);
     }

@@ -10,7 +10,7 @@ class LimitProcessor implements ProcessorInterface
     public function process(Select $select, SearchCriteriaInterface $searchCriteria): Select
     {
         $pageSize    = $searchCriteria->getPageSize();
-        $currentPage = $searchCriteria->getCurrentPage();
+        $currentPage = max(0, $searchCriteria->getCurrentPage() - 1);
 
         if ($pageSize !== null) {
             $select->limit($pageSize, $currentPage * $pageSize);
