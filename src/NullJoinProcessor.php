@@ -7,6 +7,9 @@ namespace Renttek\SearchCriteriaProcessor;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\DB\Select;
 
+/**
+ * @codeCoverageIgnore
+ */
 class NullJoinProcessor implements ProcessorInterface
 {
     public function process(Select $select, SearchCriteriaInterface $searchCriteria): Select
