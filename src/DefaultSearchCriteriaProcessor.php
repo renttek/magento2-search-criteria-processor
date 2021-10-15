@@ -16,14 +16,11 @@ class DefaultSearchCriteriaProcessor extends ChainProcessor
         JoinProcessor $joinProcessor = null
     ) {
         $processors = [
-            $filterProcessor ?? new FilterProcessor(),
-            $limitProcessor ?? new LimitProcessor(),
-            $sortProcessor ?? new SortOrderProcessor(),
+            $filterProcessor,
+            $limitProcessor,
+            $sortProcessor,
+            $joinProcessor ?? new NullJoinProcessor
         ];
-
-        if ($joinProcessor !== null) {
-            $processors[] = $joinProcessor;
-        }
 
         parent::__construct($processors);
     }
