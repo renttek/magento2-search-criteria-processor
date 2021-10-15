@@ -3,14 +3,5 @@ parameters:
     inferPrivatePropertyTypeFromConstructor: true
     fileExtensions:
         - php
-        # - phtml
     paths:
         - src
-    ignoreErrors:
-#        - '#^Parameter .* of method .* has invalid typehint type .*(Factory|Proxy)\.$#'
-#        - '#^Call to method .* on an unknown class .*(Factory|Proxy)\.$#'
-#        - '#^Property .* has unknown class .*Factory as its type\.$#'
-#        - '#.* expects string, Magento\\Framework\\Phrase given\.$#'
-#        - '#.* expects .*, Magento\\Framework\\Api\\Search\\DocumentInterface given\.$#'
-#        - '#.* Magento\\Framework\\Api\\FilterBuilder::setValue() expects array|string, .* given\.$#'
-#        - '#.* expects array<.*?>, array<int, .*?> given\.$#'
