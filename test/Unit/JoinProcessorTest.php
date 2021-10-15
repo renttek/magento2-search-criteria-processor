@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Renttek\SearchCriteriaProcessor\Test\Unit;
 
-use InvalidArgumentException;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\DB\Select;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Renttek\SearchCriteriaProcessor\FieldExtractor\FieldExtractorInterface;
 use Renttek\SearchCriteriaProcessor\Join\JoinInterface;
 use Renttek\SearchCriteriaProcessor\JoinProcessor;
-use Renttek\SearchCriteriaProcessor\LimitProcessor;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use stdClass;
 
 class JoinProcessorTest extends TestCase
 {
@@ -59,7 +56,7 @@ class JoinProcessorTest extends TestCase
             ->getMock();
 
         $joins = [
-            'join_1' => $this->joinMock
+            'join_1' => $this->joinMock,
         ];
 
         $this->joinProcessor = new JoinProcessor($this->fieldExtractorMock, $joins);
@@ -120,6 +117,31 @@ class JoinProcessorTest extends TestCase
             ->expects(self::once())
             ->method('addJoinToSelect')
             ->with($this->selectMock, ['field-1']);
+
+        $this->joinProcessor->process($this->selectMock, $this->searchCriteriaMock);
+    }
+
+    public function testJoinsTablesFromSelectedColumns(): void
+    {
+        $this->selectMock
+            ->expects(self::exactly(2))
+            ->method('getPart')
+            ->withConsecutive(
+                [Select::COLUMNS],
+                [Select::FROM]
+            )
+            ->willReturnOnConsecutiveCalls(
+                [
+                    'table-1' => ['table-1', '*', null],
+                    'table-2' => ['table-2', 'field-2', null],
+                ],
+                ['table-1' => 'table-1']
+            );
+
+        $this->joinMock
+            ->method('supportsTable')
+            ->with('table-2')
+            ->willReturn(true);
 
         $this->joinProcessor->process($this->selectMock, $this->searchCriteriaMock);
     }

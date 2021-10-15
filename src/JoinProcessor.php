@@ -31,8 +31,10 @@ class JoinProcessor implements ProcessorInterface
 
     public function process(Select $select, SearchCriteriaInterface $searchCriteria): Select
     {
-        $tables = $this->getTablesFromSearchCriteria($searchCriteria);
+        $columnsTables  = $this->getTablesFromSelectedColumns($select);
+        $criteriaTables = $this->getTablesFromSearchCriteria($searchCriteria);
 
+        $tables = array_merge_recursive($columnsTables, $criteriaTables);
         foreach ($tables as $table => $fields) {
             $join = $this->getMatchingJoin($table);
             if (!$join instanceof JoinInterface) {
@@ -55,6 +57,32 @@ class JoinProcessor implements ProcessorInterface
         $fields = $this->fieldExtractor->getFields($searchCriteria);
 
         return groupFieldsByTables($fields);
+    }
+
+    /**
+     * @return array<string, array<string>>
+     */
+    private function getTablesFromSelectedColumns(Select $select): array
+    {
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $columns = $select->getPart(Select::COLUMNS);
+        if ($columns === null) {
+            return [];
+        }
+
+        $mainTableName = $this->getMainTableName($select);
+
+        return array_filter(
+            groupFieldsByTables($columns),
+            static fn (string $table) => $table !== $mainTableName,
+            ARRAY_FILTER_USE_KEY
+        );
+    }
+
+    private function getMainTableName(Select $select): string
+    {
+        $from = $select->getPart(Select::FROM);
+        return (string)array_key_first($from);
     }
 
     private function getMatchingJoin(string $table): ?JoinInterface
