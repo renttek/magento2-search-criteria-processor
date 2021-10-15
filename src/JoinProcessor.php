@@ -24,7 +24,7 @@ class JoinProcessor implements ProcessorInterface
     public function __construct(FieldExtractorInterface $fieldExtractor, array $joins)
     {
         $this->fieldExtractor = $fieldExtractor;
-        $this->setJoins(...$joins);
+        $this->setJoins(...array_values($joins));
     }
 
     public function process(Select $select, SearchCriteriaInterface $searchCriteria): Select

@@ -18,7 +18,7 @@ class ChainFieldExtractor implements FieldExtractorInterface
      */
     public function __construct(array $fieldExtractors)
     {
-        $this->setFieldExtractors(...$fieldExtractors);
+        $this->setFieldExtractors(...array_values($fieldExtractors));
     }
 
     public function getFields(SearchCriteriaInterface $searchCriteria): array

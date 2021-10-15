@@ -20,7 +20,7 @@ class ChainProcessor implements ProcessorInterface
      */
     public function __construct(array $processors)
     {
-        $this->setProcessors(...$processors);
+        $this->setProcessors(...array_values($processors));
     }
 
     public function process(Select $select, SearchCriteriaInterface $searchCriteria): Select

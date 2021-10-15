@@ -41,9 +41,9 @@ class ChainProcessorTest extends TestCase
             ->getMock();
 
         $this->processorMocks = [
-            $this->getMockBuilder(ProcessorInterface::class)->getMock(),
-            $this->getMockBuilder(ProcessorInterface::class)->getMock(),
-            $this->getMockBuilder(ProcessorInterface::class)->getMock(),
+            'processor_1' => $this->getMockBuilder(ProcessorInterface::class)->getMock(),
+            'processor_2' => $this->getMockBuilder(ProcessorInterface::class)->getMock(),
+            'processor_3' => $this->getMockBuilder(ProcessorInterface::class)->getMock(),
         ];
 
         $this->chainProcessor = new ChainProcessor($this->processorMocks);

@@ -56,7 +56,11 @@ class JoinProcessorTest extends TestCase
         $this->joinMock = $this->getMockBuilder(JoinInterface::class)
             ->getMock();
 
-        $this->joinProcessor = new JoinProcessor($this->fieldExtractorMock, [$this->joinMock]);
+        $joins = [
+            'join_1' => $this->joinMock
+        ];
+
+        $this->joinProcessor = new JoinProcessor($this->fieldExtractorMock, $joins);
     }
 
     public function testGetsTablesFromAllFieldExtractors(): void

@@ -36,7 +36,11 @@ class ChainFieldExtractorTest extends TestCase
         $this->fieldExtractorMock = $this->getMockBuilder(FieldExtractorInterface::class)
             ->getMock();
 
-        $this->chainFieldExtractor = new ChainFieldExtractor([$this->fieldExtractorMock]);
+        $fieldExtractors = [
+            'extractor_1' => $this->fieldExtractorMock
+        ];
+
+        $this->chainFieldExtractor = new ChainFieldExtractor($fieldExtractors);
     }
 
     public function testCallsEveryExtractorWithSearchCriteria(): void
