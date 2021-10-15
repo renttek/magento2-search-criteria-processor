@@ -38,7 +38,7 @@ static:
 	vendor/bin/php-cs-fixer fix test/Unit --dry-run --show-progress=none --quiet
 
 	echo "Running MessDetector"
-	vendor/bin/phpmd src text cleancode,codesize,design,unusedcode
+	vendor/bin/phpmd src text phpmd.xml
 
 	echo "Running PHPStan"
 	vendor/bin/phpstan analyse --no-progress --configuration=phpstan.neon
