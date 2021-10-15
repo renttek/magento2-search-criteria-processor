@@ -44,11 +44,15 @@ class LeftJoin implements JoinInterface
 
     protected function getJoinConditionString(Select $select): string
     {
+        $foreignTable = $this->hasAlias()
+            ? $this->foreignTableAlias
+            : $this->foreignTableName;
+
         return sprintf(
             '%s.%s = %s.%s',
             $this->getMainTableName($select),
             $this->mainTableField,
-            $this->foreignTableName,
+            $foreignTable,
             $this->foreignTableField
         );
     }
