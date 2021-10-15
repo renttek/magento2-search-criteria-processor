@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Renttek\SearchCriteriaProcessor\Test\Unit;
 
@@ -41,7 +43,7 @@ class SortOrderProcessorTest extends TestCase
             ->method('getSortOrders')
             ->willReturn($sortOrders);
 
-        $this->sortOrderProcessor = new SortOrderProcessor;
+        $this->sortOrderProcessor = new SortOrderProcessor();
     }
 
     public function testReadsSortOrdersFromSearchCriteria(): void

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Renttek\SearchCriteriaProcessor\Test\Unit\FieldExtractor;
 
@@ -39,7 +41,7 @@ class SortOrderFieldExtractorTest extends TestCase
             ->method('getSortOrders')
             ->willReturn($this->sortOrderMocks);
 
-        $this->sortOrderFieldExtractor = new SortOrderFieldExtractor;
+        $this->sortOrderFieldExtractor = new SortOrderFieldExtractor();
     }
 
     public function testGetsSortOrdersFromSearchCriteria(): void

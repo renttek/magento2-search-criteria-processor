@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Renttek\SearchCriteriaProcessor\Test\Unit\FieldExtractor;
 
@@ -27,8 +29,7 @@ class AbstractFieldExtractorTest extends TestCase
 
     private function getDummyFieldExtractor()
     {
-        return new class extends AbstractFieldExtractor
-        {
+        return new class() extends AbstractFieldExtractor {
             public function test(string $value): ?array
             {
                 return $this->getFieldTable($value);

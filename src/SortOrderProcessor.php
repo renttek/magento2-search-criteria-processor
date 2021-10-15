@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Renttek\SearchCriteriaProcessor;
 
@@ -11,10 +13,10 @@ class SortOrderProcessor implements ProcessorInterface
     public function process(Select $select, SearchCriteriaInterface $searchCriteria): Select
     {
         $sortOrders = $searchCriteria->getSortOrders() ?? [];
-        $sortOrders = filter($sortOrders, static fn(SortOrder $sortOrder) => $sortOrder->getField() !== null);
+        $sortOrders = filter($sortOrders, static fn (SortOrder $sortOrder) => $sortOrder->getField() !== null);
         $sortOrders = map(
             $sortOrders,
-            static fn(SortOrder $sortOrder) => "{$sortOrder->getField()} {$sortOrder->getDirection()}"
+            static fn (SortOrder $sortOrder) => "{$sortOrder->getField()} {$sortOrder->getDirection()}"
         );
 
         return $select->order($sortOrders);

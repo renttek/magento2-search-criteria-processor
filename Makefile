@@ -33,9 +33,9 @@ static:
 	find src -name '*.phtml' -print0 | xargs -0 -n1 php -l 1>/dev/null
 	find test -name '*.php' -print0 | xargs -0 -n1 php -l 1>/dev/null
 
-	echo "Running CodeSniffer"
-	vendor/bin/phpcs --standard=psr2 src
-	vendor/bin/phpcs --standard=psr2 test/Unit
+	echo "Running PHP-CS-Fixer"
+	vendor/bin/php-cs-fixer fix src --dry-run --show-progress=none --quiet
+	vendor/bin/php-cs-fixer fix test/Unit --dry-run --show-progress=none --quiet
 
 	echo "Running MessDetector"
 	vendor/bin/phpmd src text cleancode,codesize,design,unusedcode

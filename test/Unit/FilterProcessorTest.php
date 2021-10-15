@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Renttek\SearchCriteriaProcessor\Test\Unit;
 
@@ -75,7 +77,7 @@ class FilterProcessorTest extends TestCase
             ->method('getConnection')
             ->willReturn($this->connectionMock);
 
-        $this->filterProcessor = new FilterProcessor;
+        $this->filterProcessor = new FilterProcessor();
     }
 
     public function testGetsGroupsFromSearchCriteria(): void

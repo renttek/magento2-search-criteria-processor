@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Renttek\SearchCriteriaProcessor\Test\Unit;
 
@@ -34,7 +36,7 @@ class LimitProcessorTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->limitProcessor = new LimitProcessor;
+        $this->limitProcessor = new LimitProcessor();
     }
 
     public function testReturnsSelectUnchangedIfPageSizeIsNull(): void

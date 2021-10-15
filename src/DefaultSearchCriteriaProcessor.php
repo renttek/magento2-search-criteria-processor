@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Renttek\SearchCriteriaProcessor;
 
@@ -14,9 +16,9 @@ class DefaultSearchCriteriaProcessor extends ChainProcessor
         JoinProcessor $joinProcessor = null
     ) {
         $processors = [
-            $filterProcessor ?? new FilterProcessor,
-            $limitProcessor ?? new LimitProcessor,
-            $sortProcessor ?? new SortOrderProcessor,
+            $filterProcessor ?? new FilterProcessor(),
+            $limitProcessor ?? new LimitProcessor(),
+            $sortProcessor ?? new SortOrderProcessor(),
         ];
 
         if ($joinProcessor !== null) {
