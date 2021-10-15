@@ -92,4 +92,38 @@ class LeftJoinTest extends TestCase
 
         $leftJoin->addJoinToSelect($selectMock, []);
     }
+
+    public function testOnlyForeignKeyAliasIsSupportedIfSet()
+    {
+        $leftJoin = new LeftJoin(
+            'mainTableField',
+            'foreignTableName',
+            'foreignTableField',
+            'foreignTableAlias'
+        );
+
+        self::assertTrue($leftJoin->supportsTable('foreignTableAlias'));
+        self::assertFalse($leftJoin->supportsTable('foreignTableName'));
+    }
+
+    public function testForeignTableAliasIsUsedForJoinIfSet(): void
+    {
+        $leftJoin = new LeftJoin(
+            'mainTableField',
+            'foreignTableName',
+            'foreignTableField',
+            'foreignTableAlias'
+        );
+
+        $this->selectMock
+            ->expects(self::once())
+            ->method('joinLeft')
+            ->with(
+                ['foreignTableAlias' => 'foreignTableName'],
+                self::anything(),
+                self::anything()
+            );
+
+        $leftJoin->addJoinToSelect($this->selectMock, []);
+    }
 }
