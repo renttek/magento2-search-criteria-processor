@@ -32,7 +32,9 @@ class FilterProcessor implements ProcessorInterface
 
         foreach ($filterGroup->getFilters() ?? [] as $filter) {
             $value = $filter->getValue();
-            $value = !is_string($value) ? (int)$value : $value;
+            $value = !is_string($value) && !is_array($value)
+                ? (int)$value
+                : $value;
 
             $groupParts[] = $connection->prepareSqlCondition(
                 $filter->getField(),

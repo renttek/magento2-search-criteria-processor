@@ -13,7 +13,7 @@ class DefaultSearchCriteriaProcessor extends ChainProcessor
         FilterProcessor $filterProcessor,
         LimitProcessor $limitProcessor,
         SortOrderProcessor $sortProcessor,
-        JoinProcessor $joinProcessor = null
+        ?JoinProcessor $joinProcessor = null
     ) {
         $processors = [
             $filterProcessor,

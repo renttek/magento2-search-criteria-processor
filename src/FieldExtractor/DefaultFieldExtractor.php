@@ -9,7 +9,7 @@ namespace Renttek\SearchCriteriaProcessor\FieldExtractor;
  */
 class DefaultFieldExtractor extends ChainFieldExtractor
 {
-    public function __construct(array $fieldExtractors = null)
+    public function __construct(?array $fieldExtractors = null)
     {
         $fieldExtractors = $fieldExtractors ?? [
             new FilterFieldExtractor(),
